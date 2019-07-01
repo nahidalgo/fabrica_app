@@ -1,69 +1,35 @@
+import 'package:fabrica_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'PiranguinhoStore.dart';
 import 'ItajubaStore.dart';
 
-void main() => runApp(new HomeScreen());
+void main() => runApp(new MyApp());
 
-class HomeScreen extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'App Fábrica',
         theme: ThemeData(
-          primaryColor: Colors.white,
+          primaryColor: Colors.red[800],
+          accentColor: Color.fromRGBO(142, 0, 0, 255),
+          buttonTheme: ButtonThemeData(
+            alignedDropdown: true,
+            buttonColor: Colors.red[800],
+            height: 48
+          ),
+          //canvasColor: Color.fromRGBO(255, 95, 82, 255),
+          textTheme: TextTheme(
+            button: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+            subhead: TextStyle(color: Colors.white, fontSize: 18),
+
+          )
         ),
         debugShowCheckedModeBanner: false,
-        home: Container(
-            color: Colors.white,
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text('App Fábrica'),
-              ),
-              body: SingleChildScrollView(
-                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Piranguinho',
-                        alignLabelWithHint: true,
-                      ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Insira a quantidade";
-                        }
-                      },
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Itajubá',
-                        alignLabelWithHint: true,
-                      ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Insira a quantidade";
-                        }
-                      },
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    )
-                  ],
-                ),
-              ),
-            )));
+        home: HomeScreen(),
+        );
   }
 }
