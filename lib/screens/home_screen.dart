@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DropdownMenuItem(
       child: Text(
         "Itajubá",
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.white),
       ),
       value: "Itajubá",
     ),
@@ -106,6 +106,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     });
                   //}
+                    setState(() {
+                      _quantityController.text = '';
+                    },
+                    );
                 },
               ),
             ],
