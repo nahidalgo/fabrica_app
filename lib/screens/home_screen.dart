@@ -19,13 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
   var listaCidades = [
     DropdownMenuItem(
       child: Text(
-        "Itajubá",
-        style: TextStyle(color: Colors.white),
+        "Itajubá"
       ),
       value: "Itajubá",
     ),
     DropdownMenuItem(
-      child: Text("Piranguinho", style: TextStyle(color: Colors.black)),
+      child: Text("Piranguinho"
+      ),
       value: "Piranguinho",
     ),
   ];
@@ -53,7 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Image.asset("images/imperiodaEmpada.png", fit: BoxFit.fitHeight, height: 200,),
+              SizedBox(height: 57,),
+              Image.asset("images/logo.png", fit: BoxFit.fitHeight, height: 100,),
+              SizedBox(height: 29),
               TextFormField(
                 controller: _quantityController,
                 key: _textFieldKey,
@@ -78,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  //if (_textFieldKey.currentState.validate()) {
                     var doc = await db
                         .collection(cidadeSelecionada)
                         .document("EmpadasCruas")
