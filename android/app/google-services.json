@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1076503143044",
-    "firebase_url": "https://imperio-da-empada-ff25b.firebaseio.com",
-    "project_id": "imperio-da-empada-ff25b",
-    "storage_bucket": "imperio-da-empada-ff25b.appspot.com"
+    "project_number": "383935653789",
+    "firebase_url": "https://imperio-da-empada-b66ab.firebaseio.com",
+    "project_id": "imperio-da-empada-b66ab",
+    "storage_bucket": "imperio-da-empada-b66ab.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1076503143044:android:775da3d79529bef2",
+        "mobilesdk_app_id": "1:383935653789:android:30480afe037cab1f4df174",
         "android_client_info": {
-          "package_name": "br.com.asimovjr.fabrica_app"
+          "package_name": "br.com.asimovjr.balcao_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1076503143044-rhhqk0l8htp5n9pemqnhqdsoj2n89gb4.apps.googleusercontent.com",
+          "client_id": "383935653789-36u4d5n2onuioei7rnard8bqtuq6u6ov.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCR54mcXghkRIWyrJJD116tnOxybFXaVc0"
+          "current_key": "AIzaSyAaPpilzTJoSACmzvN-hMwrTg0SBlHuo9A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1076503143044-rhhqk0l8htp5n9pemqnhqdsoj2n89gb4.apps.googleusercontent.com",
+              "client_id": "383935653789-36u4d5n2onuioei7rnard8bqtuq6u6ov.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

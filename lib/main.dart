@@ -1,7 +1,6 @@
 import 'package:fabrica_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'PiranguinhoStore.dart';
-import 'ItajubaStore.dart';
+
 
 void main() => runApp(new MyApp());
 

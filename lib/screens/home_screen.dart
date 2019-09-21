@@ -106,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     });
-                  //}
                     setState(() {
                       _quantityController.text = '';
                     },
