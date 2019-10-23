@@ -10,7 +10,7 @@ var db = Firestore.instance;
 
 class _HomeScreenState extends State<HomeScreen> {
   var cidadeSelecionada = "Itajubá";
-
+  var saborSelecionado = "Frango";
   var _textFieldKey = GlobalKey<FormState>();
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,6 +29,32 @@ class _HomeScreenState extends State<HomeScreen> {
       value: "Piranguinho",
     ),
   ];
+   var listaSabores = [
+      DropdownMenuItem(
+        child: Text(
+          "Frango"
+        ),
+        value: "Frango",
+      ),
+       DropdownMenuItem(
+        child: Text(
+          "Queijo"
+        ),
+        value: "Queijo",
+      ),
+       DropdownMenuItem(
+        child: Text(
+          "Palmito"
+        ),
+        value: "Palmito",
+      ),
+       DropdownMenuItem(
+        child: Text(
+          "Presunto"
+        ),
+        value: "Presunto",
+      ),
+    ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 57,),
+              SizedBox(height: 15.0,),
               Image.asset("images/logo.png", fit: BoxFit.fitHeight, height: 100,),
-              SizedBox(height: 29),
+               Center(
+                 child:
+                    DropdownButton(
+
+                      items: listaSabores,
+                      onChanged: (sabor) {
+                        setState(() {
+                          saborSelecionado = sabor;
+                        });
+                      },
+                      value: saborSelecionado,
+                    ), 
+              ),                
+              SizedBox(height: 2.0),
               TextFormField(
                 controller: _quantityController,
                 key: _textFieldKey,
@@ -80,16 +119,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
+                   
                     var doc = await db
                         .collection(cidadeSelecionada)
                         .document("EmpadasCruas")
+                        .collection("Empada")
+                        .document(saborSelecionado)
                         .get();
+
                     var novaQuantidade = doc.data['quantidade'] +
                         int.parse(_quantityController.text);
+
 
                     db
                         .collection(cidadeSelecionada)
                         .document("EmpadasCruas")
+                        .collection("Empada")
+                        .document(saborSelecionado)
                         .updateData({"quantidade": novaQuantidade}).then((_) {
                       _scaffoldKey.currentState.showSnackBar(
                         SnackBar(
