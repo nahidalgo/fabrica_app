@@ -29,32 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
       value: "Piranguinho",
     ),
   ];
-   var listaSabores = [
-      DropdownMenuItem(
-        child: Text(
-          "Frango"
-        ),
-        value: "Frango",
-      ),
-       DropdownMenuItem(
-        child: Text(
-          "Queijo"
-        ),
-        value: "Queijo",
-      ),
-       DropdownMenuItem(
-        child: Text(
-          "Palmito"
-        ),
-        value: "Palmito",
-      ),
-       DropdownMenuItem(
-        child: Text(
-          "Presunto"
-        ),
-        value: "Presunto",
-      ),
-    ];
 
   @override
   Widget build(BuildContext context) {
@@ -81,19 +55,53 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               SizedBox(height: 15.0,),
               Image.asset("images/logo.png", fit: BoxFit.fitHeight, height: 100,),
-               Center(
-                 child:
-                    DropdownButton(
-
-                      items: listaSabores,
-                      onChanged: (sabor) {
-                        setState(() {
-                          saborSelecionado = sabor;
-                        });
-                      },
-                      value: saborSelecionado,
-                    ), 
-              ),                
+              SizedBox(height: 15.0,),
+              StreamBuilder<QuerySnapshot>(
+                stream: db
+                        .collection(cidadeSelecionada)
+                        .document("EmpadasCruas")
+                        .collection("Empada")
+                        .snapshots(),
+                
+                builder: (BuildContext context, AsyncSnapshot snapshot){
+                  if(!snapshot.hasData)
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                else {
+                  List<DropdownMenuItem> listaSabores =[];
+                  for(int i=0; i<snapshot.data.documents.length;i++){
+                    DocumentSnapshot snap = snapshot.data.documents[i];
+                    listaSabores.add(DropdownMenuItem(
+                      child: Text(snap.documentID),
+                      value: "${snap.documentID}",
+                    ));
+                  }
+                  return Row(
+                    mainAxisAlignment:  MainAxisAlignment.center,
+                    children: <Widget>[
+                      DropdownButton(
+                        items: listaSabores,
+                        onChanged: (sabor){
+                          final snackBar = SnackBar(
+                            content: Text(
+                              "$sabor foi selecionado!"
+                            ),
+                          );
+                          Scaffold.of(context).showSnackBar(snackBar);
+                          setState(() {
+                            saborSelecionado = sabor;
+                          });
+                        },
+                        value: saborSelecionado,
+                        isExpanded: false,
+                        
+                      )
+                    ],
+                  );
+                }
+                }
+              ),    
               SizedBox(height: 2.0),
               TextFormField(
                 controller: _quantityController,
@@ -119,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                   
+
                     var doc = await db
                         .collection(cidadeSelecionada)
                         .document("EmpadasCruas")
@@ -129,7 +137,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     var novaQuantidade = doc.data['quantidade'] +
                         int.parse(_quantityController.text);
-
 
                     db
                         .collection(cidadeSelecionada)
