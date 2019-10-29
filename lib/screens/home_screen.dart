@@ -10,7 +10,7 @@ var db = Firestore.instance;
 
 class _HomeScreenState extends State<HomeScreen> {
   var cidadeSelecionada = "Itajubá";
-  var saborSelecionado = "Frango";
+  var saborSelecionado = "Caipira";
   var _textFieldKey = GlobalKey<FormState>();
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -134,6 +134,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         .collection("Empada")
                         .document(saborSelecionado)
                         .get();
+
+                    var snapshots = await db
+                        .collection(cidadeSelecionada)
+                        .document("EmpadasCruas")
+                        .collection("Empada")
+                        .getDocuments();
+
+                    var total=0;
+
+                      for (DocumentSnapshot doc in snapshots.documents) {
+                          if (doc.data != null) {
+                          total += doc.data["quantidade"];
+                          }
+                      }
+
+                    db
+                    .collection(cidadeSelecionada)
+                    .document("EmpadasCruas")
+                    .updateData({"quantidade" : total});
 
                     var novaQuantidade = doc.data['quantidade'] +
                         int.parse(_quantityController.text);
